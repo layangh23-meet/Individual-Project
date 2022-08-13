@@ -36,7 +36,7 @@ def signin():
         password = request.form['password']
         try:
             login_session['user'] = auth.sign_in_user_with_email_and_password(email,password)
-            return redirect(url_for('books.html'))
+            return redirect(url_for('mainpage.html'))
         except:
             error = "Authentication failed"
     return render_template("signin.html")
@@ -52,7 +52,7 @@ def signup():
             user= {"email": request.form['email'],"password": request.form['password'], "phone": request.form['phonenumber']}
             login_session['user'] = auth.create_user_with_email_and_password(email,password)
             db.child("Users").child(login_session['user']['localId']).set(user)
-            return redirect(url_for('books'))
+            return redirect(url_for('mainpage'))
         except:
             error=error
 
@@ -67,7 +67,10 @@ def signout():
     auth.current_user = None
     return redirect(url_for('mainpage'))
 
-
+@app.route('/books')
+def books(): 
+    user =db.child("Users").child(login_session['user']['localId']).get().val()
+    return render_template('books.html',user = user)
 
 @app.route('/product', methods=['GET', 'POST'])
 def product():
