@@ -36,7 +36,7 @@ def signin():
         password = request.form['password']
         try:
             login_session['user'] = auth.sign_in_user_with_email_and_password(email,password)
-            return redirect(url_for('mainpage.html'))
+            return redirect(url_for('books'))
         except:
             error = "Authentication failed"
     return render_template("signin.html")
