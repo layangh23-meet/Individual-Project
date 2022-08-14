@@ -6,7 +6,7 @@
     <style type="text/css">
         body {
 
-          background-image: url('background.jpeg'); 
+          background-image: url("{{ url_for('static', filename='css/images/background.jpeg') }}"); 
           background-size: cover;}
     </style>
 
@@ -21,6 +21,7 @@
     <input type="text" name="id" placeholder="your id ">
     <input type="text" name="birthday" placeholder="your birthday">
     <input type="submit" value="Submit">
+    {{error}}
     <h1>have an account press here!</h1>
 </form>
    <button> <a href="/signin"> i have an account!</a></button>
